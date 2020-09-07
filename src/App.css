@@ -1,0 +1,50 @@
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+  grid-template-rows: 5rem 1fr 5rem;
+  grid-template-columns: 1fr;
+  height: 100%;
+}
+header {
+  grid-area: header;
+  background-color: #203040;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+}
+header a {
+  color: #fff;
+  text-decoration: none;
+}
+a:hover {
+  color: orange;
+}
+main {
+  grid-area: main;
+}
+footer {
+  grid-area: footer;
+  background-color: #203040;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+}
+.main {
+  float: 3 60rem;
+}
+.sidebar {
+  float: 1 20rem;
+}
+a {
+  text-decoration: none;
+}
