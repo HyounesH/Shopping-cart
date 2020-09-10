@@ -8,7 +8,7 @@ export function Products(props) {
         <div>
             <ul className="products">
                 {props.products.map(product => (
-                    <li key={product.id}>
+                    <li key={product._id}>
                         <Product
                             _id={product._id}
                             image={product.image}
