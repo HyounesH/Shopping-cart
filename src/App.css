@@ -13,6 +13,7 @@ header {
   background-color: #203040;
   color: #fff;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 0.5rem;
 }
@@ -40,10 +41,10 @@ footer {
   flex-wrap: wrap;
 }
 .main {
-  float: 3 60rem;
+  flex: 3 60rem;
 }
 .sidebar {
-  float: 1 20rem;
+  flex: 1 20rem;
 }
 a {
   text-decoration: none;
