@@ -66,7 +66,7 @@ export default class Product extends React.Component {
                                         }}
                                         >Add To Cart</button>
                                     </div>
-                                </div>
+                                </div> 
                             </div>
                         </Zoom>
                     </Modal>
