@@ -2,17 +2,30 @@ import React from 'react'
 import OrderFilter from './OrderFilter'
 import SizeFilter from './SizeFilter'
 import "./Filter.css"
+import { connect } from 'react-redux';
 
-export default function Filter({ count, size, sort, sortProducts, filterProducts }) {
-
-    return (
-        <div className="filter">
-            <div className="filter-result">{count} Products</div>
-            <OrderFilter sort={sort}
-                sortProducts={sortProducts} />
-            <SizeFilter size={size}
-                filterProducts={filterProducts} />
-        </div>
-    )
-
+class Filter extends React.Component {
+    render() {
+        const {filteredProducts } = this.props;
+        return (
+            !filteredProducts ?
+                (<div>Loading ...</div>)
+                :
+                (
+                    <div className="filter">
+                        <div className="filter-result">{filteredProducts.length} Products</div>
+                        <OrderFilter />
+                        <SizeFilter />
+                    </div>
+                )
+        )
+    }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        filteredProducts: state.products.filteredItems
+    };
+}
+
+export default connect(mapStateToProps)(Filter);

@@ -1,5 +1,4 @@
 import React from 'react';
-import data from './data.json';
 import "./App.css";
 import Products  from './products/Products';
 import Filter from './filter/Filter';
@@ -13,10 +12,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      products: [],
       cartItems: localStorage.getItem(LOCAL_STORAGE_CART_ITEMS) ? JSON.parse(localStorage.getItem(LOCAL_STORAGE_CART_ITEMS)) : [],
-      size: "",
-      sort: "",
     }
   }
 
@@ -34,28 +30,6 @@ class App extends React.Component {
     }
     this.setState({ cartItems: cartItems });
     localStorage.setItem(LOCAL_STORAGE_CART_ITEMS, JSON.stringify(cartItems));
-  }
-  filterProducts = (event) => {
-    const currentSize = event.target.value;
-    this.setState({
-      size: currentSize,
-      products: currentSize === "" ? data.products : data.products.filter(product => product.availableSizes.indexOf(currentSize) >= 0)
-    });
-  }
-  sortProducts = (event) => {
-    const currentSort = event.target.value;
-    this.setState((state) => ({
-      sort: currentSort,
-      products: state.products.slice()
-        .sort((a, b) =>
-          currentSort === "highest" ?
-            a.price < b.price ? 1 : -1 :
-            currentSort === "lowest" ?
-              a.price > b.price ? 1 : -1 :
-              a._id < b._id ? 1 : -1
-        ),
-
-    }));
   }
 
   removeFromCart = (item) => {
@@ -79,13 +53,8 @@ class App extends React.Component {
         <main>
           <div className="content">
             <div className="main">
-              <Filter count={this.state.products.length}
-                size={this.state.size}
-                sort={this.state.sort}
-                filterProducts={this.filterProducts}
-                sortProducts={this.sortProducts}
-              />
-              <Products products={this.state.products}
+              <Filter />
+              <Products
                 addToCart={this.addToCart}
               />
             </div>
