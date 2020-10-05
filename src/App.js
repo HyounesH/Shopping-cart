@@ -1,18 +1,20 @@
 import React from 'react';
 import data from './data.json';
 import "./App.css";
-import { Products } from './products/Products';
+import Products  from './products/Products';
 import Filter from './filter/Filter';
 import Cart from './cart/Cart';
+import { Provider } from 'react-redux';
+import store from "./store";
 
-import {LOCAL_STORAGE_CART_ITEMS} from './constants/CartConstants';
+import { LOCAL_STORAGE_CART_ITEMS } from './constants/CartConstants';
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      products: data.products,
-      cartItems: localStorage.getItem(LOCAL_STORAGE_CART_ITEMS)? JSON.parse(localStorage.getItem(LOCAL_STORAGE_CART_ITEMS)) : [],
+      products: [],
+      cartItems: localStorage.getItem(LOCAL_STORAGE_CART_ITEMS) ? JSON.parse(localStorage.getItem(LOCAL_STORAGE_CART_ITEMS)) : [],
       size: "",
       sort: "",
     }
@@ -31,7 +33,7 @@ class App extends React.Component {
       cartItems.push({ ...product, count: 1 });
     }
     this.setState({ cartItems: cartItems });
-    localStorage.setItem(LOCAL_STORAGE_CART_ITEMS,JSON.stringify(cartItems));
+    localStorage.setItem(LOCAL_STORAGE_CART_ITEMS, JSON.stringify(cartItems));
   }
   filterProducts = (event) => {
     const currentSize = event.target.value;
@@ -61,14 +63,15 @@ class App extends React.Component {
     this.setState({
       cartItems: cartItems.filter(x => x._id !== item._id)
     });
-    localStorage.setItem(LOCAL_STORAGE_CART_ITEMS,JSON.stringify(cartItems.filter(x => x._id !== item._id)));
+    localStorage.setItem(LOCAL_STORAGE_CART_ITEMS, JSON.stringify(cartItems.filter(x => x._id !== item._id)));
   }
 
-  saveOrder = (order)=> {
-    alert("Need to save the order for "+ order.name);
+  saveOrder = (order) => {
+    alert("Need to save the order for " + order.name);
   }
   render() {
     return (
+      <Provider store={store}>
       <div className="grid-container">
         <header>
           <a href="/">Shopping cart</a>
@@ -95,6 +98,7 @@ class App extends React.Component {
         </main>
         <footer>This is footer</footer>
       </div>
+      </Provider>
     );
   }
 }

@@ -8,7 +8,7 @@ import Zoom from 'react-reveal/Zoom';
 export default class Product extends React.Component {
 
     constructor(props) {
-        super(props);
+        super();
         this.state = {
             product: null,
         }
