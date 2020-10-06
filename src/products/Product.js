@@ -3,9 +3,11 @@ import "./Product.css";
 import formatCurrency from '../utils';
 import Modal from 'react-modal';
 import Zoom from 'react-reveal/Zoom';
+import { connect } from 'react-redux';
+import { addToCart } from "./../actions/CartActions";
 
 
-export default class Product extends React.Component {
+class Product extends React.Component {
 
     constructor(props) {
         super();
@@ -66,7 +68,7 @@ export default class Product extends React.Component {
                                         }}
                                         >Add To Cart</button>
                                     </div>
-                                </div> 
+                                </div>
                             </div>
                         </Zoom>
                     </Modal>
@@ -75,3 +77,5 @@ export default class Product extends React.Component {
         )
     }
 }
+
+export default connect(null, { addToCart })(Product);
